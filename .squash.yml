@@ -3,3 +3,4 @@ deployments:
     kubernetes_manifest: ./kube-deployment.yml
     deployment_type: kubernetes
     kubernetes_default_image: web
+
