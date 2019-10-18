@@ -7,5 +7,5 @@ deployments:
       - k8s:
           scripts:
            - echo '#!/bin/sh' > /script.sh
-           - echo "ls -la" >> /script.sh
+           - echo 'ls -la' >> /script.sh
            - /script.sh
