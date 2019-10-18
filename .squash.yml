@@ -6,6 +6,5 @@ deployments:
     pipelines:
       - k8s:
           scripts:
-           - echo '#!/bin/sh' > /script.sh
-           - echo 'ls -la' >> /script.sh
-           - /script.sh
+           - echo true
+           - ls -la
