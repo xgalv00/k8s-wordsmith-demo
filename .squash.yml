@@ -7,8 +7,9 @@ deployments:
       - k8s:
           scripts:
             web:
-              - echo "true"
-              - ls -la
+              - echo "#!/bin/sh" > /script.sh
+              - echo "ls -la" >> /script.sh
+              - /script.sh
       - all:
           scripts:
             - ls -la
