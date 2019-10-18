@@ -6,5 +6,9 @@ deployments:
     pipelines:
       - k8s:
           scripts:
-           - echo "true"
-           - ls -la
+            web:
+              - echo "true"
+              - ls -la
+      - all:
+          scripts:
+            - ls -la
