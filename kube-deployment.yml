@@ -1,7 +1,16 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: k8s
+  labels:
+    name: k8s
+---
 apiVersion: v1
 kind: Service
 metadata:
   name: db
+  namespace: k8s
   labels:
     app: words-db
 spec:
@@ -17,6 +26,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: db
+  namespace: k8s
   labels:
     app: words-db
 spec:
@@ -36,6 +46,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: words
+  namespace: k8s
   labels:
     app: words-api
 spec:
@@ -51,6 +62,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: words
+  namespace: k8s
   labels:
     app: words-api
 spec:
@@ -71,6 +83,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web
+  namespace: k8s
   labels:
     app: words-web
 spec:
@@ -86,6 +99,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: web
+  namespace: k8s
   labels:
     app: words-web
 spec:
