@@ -3,6 +3,7 @@ deployments:
     kubernetes_manifest: ./kube-deployment.yml
     deployment_type: kubernetes
     kubernetes_default_pod: web
+    kubernetes_namespace: k8s
     pipelines:
       - k8s:
           scripts:
