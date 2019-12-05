@@ -1,5 +1,6 @@
 deployments:
   k8s:
+    auto_deploy: true
     kubernetes_manifest: ./kube-deployment.yml
     deployment_type: kubernetes
     kubernetes_default_pod: web
