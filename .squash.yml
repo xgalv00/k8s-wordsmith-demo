@@ -1,17 +1,8 @@
 deployments:
   k8s:
-    auto_deploy_on_commits: true
-    kubernetes_manifest: ./kube-deployment.yml
     deployment_type: kubernetes
     kubernetes_default_pod: web
-    pipelines:
-      - k8s:
-          scripts:
-            web:
-              - echo "#!/bin/sh" > /script.sh
-              - echo "ls -la" >> /script.sh
-              - chmod a+x /script.sh
-              - /script.sh
-      - all:
-          scripts:
-            - ls -la
+    install:
+      - kubectl apply -f ./kube-deployment.yml
+      - while (("$(kubectl get pods | grep Running | wc -l)" < 1)); do echo "waiting for pod startup"; sleep 2; done
+      - kubectl port-forward svc/web 80:80 --address 0.0.0.0
