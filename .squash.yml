@@ -1,8 +1,8 @@
 deployments:
   App:
     kubernetes_build_image: 
-      - nginx:$SQUASH_COMMIT_SHA
-      - guestbook:$SQUASH_COMMIT_SHA
+      - nginx:$TAG
+      - guestbook:$TAG
     use_kubernetes_registry: true
     deployment_type: kubernetes
     kubernetes_default_pod: nginx
