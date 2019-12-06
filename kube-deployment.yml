@@ -100,3 +100,10 @@ spec:
         ports:
         - containerPort: 80
           name: words-web
+        env:
+        - name: REDIS
+          value: $REDIS
+        - name: SQUASH_BRANCH
+          value: $SQUASH_BRANCH
+        - name: TEST
+          value: 'test'
