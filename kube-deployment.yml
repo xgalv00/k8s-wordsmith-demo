@@ -102,8 +102,8 @@ spec:
           name: words-web
         env:
         - name: REDIS
-          value: $REDIS
+          value: $(REDIS)
         - name: SQUASH_BRANCH
-          value: $SQUASH_BRANCH
+          value: $(SQUASH_BRANCH)
         - name: TEST
           value: 'test'
