@@ -5,4 +5,4 @@ deployments:
     install:
       - kubectl apply -f ./kube-deployment.yml
       - while (("$(kubectl get pods | grep web | grep Running | wc -l)" < 1)); do echo "waiting for pod startup"; sleep 2; done
-      - kubectl port-forward pod/$(kubectl get pods -o go-template --template '{{{{range .items}}}}{{{{.metadata.name}}}}{{{{\"\\n\"}}}}{{{{end}}}}' | grep web) 80:80 --address 0.0.0.0
+      - kubectl port-forward pod/$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{\"\\n\"}}{{end}}' | grep web) 80:80 --address 0.0.0.0
