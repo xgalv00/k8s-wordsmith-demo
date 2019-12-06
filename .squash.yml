@@ -1,9 +1,12 @@
 deployments:
-  k8s:
+  App:
+    kubernetes_build_image: 
+      - nginx:$SQUASH_COMMIT_SHA
+      - guestbook:$SQUASH_COMMIT_SHA
+    use_kubernetes_registry: true
     deployment_type: kubernetes
-    kubernetes_default_pod: web
-    install:
-      - kubectl set env pods --all -e TEST=$SQUASH_BRANCH
-      - kubectl apply -f ./kube-deployment.yml
-      - while (("$(kubectl get pods | grep web | grep Running | wc -l)" < 1)); do echo "waiting for pod startup"; sleep 2; done
-      - kubectl port-forward svc/web 80:8081 --address 0.0.0.0
+    kubernetes_default_pod: nginx
+    kubernetes_port_mapping:
+      - pod/guestbook:8888
+    subdomain_port_mapping:
+      - sub:8888
