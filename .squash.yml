@@ -1,9 +1,8 @@
 deployments:
   k8s:
     deployment_type: kubernetes
-    kubernetes_default_pod: web
+    kubernetes_port_mapping: svc/web:8081
     install:
       - kubectl set env pods --all -e TEST=$SQUASH_BRANCH
       - kubectl apply -f ./kube-deployment.yml
-      - while (("$(kubectl get pods | grep web | grep Running | wc -l)" < 1)); do echo "waiting for pod startup"; sleep 2; done
-      - kubectl port-forward svc/web 80:8081 --address 0.0.0.0
+      - squash--k8s-route
