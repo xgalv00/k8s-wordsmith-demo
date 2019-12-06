@@ -3,7 +3,7 @@ deployments:
     deployment_type: kubernetes
     kubernetes_default_pod: web
     install:
+      - kubectl set env pods --all -e TEST=$SQUASH_BRANCH
       - kubectl apply -f ./kube-deployment.yml
       - while (("$(kubectl get pods | grep web | grep Running | wc -l)" < 1)); do echo "waiting for pod startup"; sleep 2; done
-      - sleep 5
       - kubectl port-forward svc/web 80:8081 --address 0.0.0.0
