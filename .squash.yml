@@ -1,9 +1,17 @@
 deployments:
+  redis:
+    kubernetes_helm_chart: install/kubernetes/helm/istio, stable/redis 
+    kubernetes_helm_parameters: 
+      install/kubernetes/helm/istio: --name istio --namespace istio-system
+    kubernetes_helm_repository: 
+      - istio.io https://storage.googleapis.com/istio-release/releases/1.2.5/charts/
+    port_forwarding: 6379:6379
+    check_service_ports: 6379
+  
   k8s:
+    kubernetes_manifest: ./kube-deployment.yml
     deployment_type: kubernetes
     kubernetes_default_pod: web
-    install:
-      - kubectl apply -f ./kube-deployment.yml
-      - while (("$(kubectl get pods | grep web | grep Running | wc -l)" < 1)); do echo "waiting for pod startup"; sleep 2; done
-      - sleep 5
-      - kubectl port-forward svc/web 80:8081 --address 0.0.0.0
+    depends_on:
+      - REDIS:
+          app: k8s-wordsmith-demo:redis
