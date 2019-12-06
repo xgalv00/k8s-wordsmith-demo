@@ -1,7 +1,7 @@
 deployments:
   k8s:
     deployment_type: kubernetes
-    kubernetes_port_mapping: pod/web:8081
+    kubernetes_port_mapping: pod/web:80
     install:
       - kubectl apply -f ./kube-deployment.yml
       - squash--k8s-route
