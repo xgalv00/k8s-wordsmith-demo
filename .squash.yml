@@ -4,6 +4,7 @@ deployments:
     kubernetes_manifest: ./kube-deployment.yml
     deployment_type: kubernetes
     kubernetes_default_pod: web
+    port_forwarding: 80:80
     pipelines:
       - k8s:
           scripts:
